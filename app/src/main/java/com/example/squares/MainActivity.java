@@ -58,9 +58,6 @@ public class MainActivity extends AppCompatActivity {
         //reset button on click listener
         Button reset = findViewById(R.id.reset);
         reset.setOnClickListener(gc);
-
-
-
     }
 
     //quit the game

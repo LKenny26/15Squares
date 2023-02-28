@@ -70,6 +70,8 @@ public class GameView {
                 }
             }
         }
+        //used to make sure the game is playable
+        //odd is not playable so recreate the game til it is even
         if (this.inversionSum() % 2 == 1) {
             this.createGame();
         }
@@ -134,27 +136,38 @@ public class GameView {
     public void colorCheck() {
         for(int i = 0; i < 4; i++) {
             for(int j = 0; j < 4; j++) {
+                //sets all buttons to gray by default
                 gm.buttonArray[i][j].setBackgroundColor(Color.GRAY);
                 if (gm.buttonArray[i][j].getText().equals(String.valueOf(gm.key[i][j]))) {
+                    //if the button is in the right place make it green
                     gm.buttonArray[i][j].setBackgroundColor(Color.GREEN);
                 }
             }
         }
     }
 
+    //inversion sum is the equation that checks whether or not a board is playable
+    //this is from the wolfram website
     public int inversionSum(){
+        //how many numbers have been checked so far
         int amountChecked = 0;
+        //variable to hold the inversion sum
         int invSum = 0;
         for (int i = 0; i < 16; i++) {
+            //variable for any numbers that are less than the current one that got checked
             int amountBefore = 1;
             for (int j = 0; j < amountChecked; j++){
                 if (gm.test[i] > gm.test[j]) {
+                    //increment amount before it there are values that are less before it
                     amountBefore++;
                 }
             }
+            //increment total amount checked so far
             amountChecked++;
+            //add to the invSum with amount before
             invSum += (gm.test[i] - amountBefore);
         }
+        //after the loops return the sum
         return invSum;
     }
 }
